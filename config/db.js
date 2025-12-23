@@ -23,6 +23,18 @@ db.connect((err) => {
   });
 
   db.query(`
+        CREATE TABLE IF NOT EXISTS logistik (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          kode VARCHAR(20),
+          nama VARCHAR(100),
+          jumlah INT,
+          status VARCHAR(20),
+          harga DECIMAL(10,2)
+        )
+      `, () => console.log('Table logistik ready'));
+  });
+
+  db.query(`
     CREATE TABLE IF NOT EXISTS meetings (
       id_meeting VARCHAR(50) PRIMARY KEY,
       judul VARCHAR(100),
@@ -62,6 +74,5 @@ db.connect((err) => {
     else console.log('Table karyawan ready');
   });
 
-});
 
 module.exports = db;
