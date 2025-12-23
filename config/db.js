@@ -11,7 +11,6 @@ const db = mysql.createConnection({
 db.connect((err) => {
   if (err) throw err;
   console.log('Database connected');
-  
   db.query(`
     CREATE TABLE IF NOT EXISTS products (
       kode_produk VARCHAR(20) PRIMARY KEY,
@@ -21,6 +20,18 @@ db.connect((err) => {
     )
   `, () => {
     console.log('Table products ready');
+  });
+  db.query(`
+    CREATE TABLE IF NOT EXISTS meetings (
+      id_meeting VARCHAR(50) PRIMARY KEY,
+      judul VARCHAR(100),
+      tanggal DATE,
+      waktu TIME,
+      deskripsi TEXT
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+  `, () => {
+    console.log('Table meetings ready');
   });
 });
 
