@@ -46,6 +46,22 @@ db.connect((err) => {
     console.log('Table maintenance_alat ready');
   });
 
+  db.query(`
+    CREATE TABLE IF NOT EXISTS karyawan (
+      nip VARCHAR(20) PRIMARY KEY,
+      nama VARCHAR(100),
+      divisi VARCHAR(50),
+      jabatan VARCHAR(50),
+      status VARCHAR(20),
+      gaji DECIMAL(15, 2),
+      alamat TEXT,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )
+  `, (err) => {
+    if (err) console.error("Error creating karyawan table:", err);
+    else console.log('Table karyawan ready');
+  });
+
 });
 
 module.exports = db;
