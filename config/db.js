@@ -74,5 +74,17 @@ db.connect((err) => {
     else console.log('Table karyawan ready');
   });
 
+  db.query(`
+    CREATE TABLE IF NOT EXISTS akun (
+      id_akun INT AUTO_INCREMENT PRIMARY KEY,
+      nip VARCHAR(20),
+      username VARCHAR(50) UNIQUE NOT NULL,
+      password VARCHAR(255) NOT NULL,
+      FOREIGN KEY (nip) REFERENCES karyawan(nip)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+    )
+  `, () => console.log('Table akun ready'));
+
 
 module.exports = db;
