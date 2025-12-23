@@ -21,6 +21,17 @@ db.connect((err) => {
     )
   `, () => {
     console.log('Table products ready');
+
+    db.query(`
+        CREATE TABLE IF NOT EXISTS logistik (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          kode VARCHAR(20),
+          nama VARCHAR(100),
+          jumlah INT,
+          status VARCHAR(20),
+          harga DECIMAL(10,2)
+        )
+      `, () => console.log('Table logistik ready'));
   });
 });
 

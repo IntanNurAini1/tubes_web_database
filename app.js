@@ -3,6 +3,7 @@ const app = express();
 
 app.use(express.json());
 app.use('/api', require('./routes/productRoutes'));
+app.use("/api", require("./routes/logistikRoutes"));
 
 app.listen(3000, () => {
   console.log('Server running on port 3000');

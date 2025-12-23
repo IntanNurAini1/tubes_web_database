@@ -2,17 +2,26 @@
   "name": "tubesweb_node",
   "version": "1.0.0",
   "description": "",
+  "keywords": [],
+  "homepage": "https://github.com/IntanNurAini1/tubes_web_database#readme",
+  "bugs": {
+    "url": "https://github.com/IntanNurAini1/tubes_web_database/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IntanNurAini1/tubes_web_database.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "mysql2": "^3.16.0"
   }
 }
