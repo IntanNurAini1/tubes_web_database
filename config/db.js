@@ -28,7 +28,7 @@ db.connect((err) => {
       judul VARCHAR(100),
       tanggal DATE,
       waktu TIME,
-      deskripsi TEXT
+      deskripsi TEXT,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
   `, () => {
