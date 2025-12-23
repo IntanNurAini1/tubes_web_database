@@ -21,6 +21,7 @@ db.connect((err) => {
   `, () => {
     console.log('Table products ready');
   });
+
   db.query(`
     CREATE TABLE IF NOT EXISTS meetings (
       id_meeting VARCHAR(50) PRIMARY KEY,
@@ -33,6 +34,18 @@ db.connect((err) => {
   `, () => {
     console.log('Table meetings ready');
   });
+
+  db.query(`
+    CREATE TABLE IF NOT EXISTS maintenance_alat (
+      id_alat VARCHAR(20) PRIMARY KEY,
+      nama_alat VARCHAR(100),
+      deskripsi TEXT,
+      status VARCHAR(20)
+    )
+  `, () => {
+    console.log('Table maintenance_alat ready');
+  });
+
 });
 
 module.exports = db;
