@@ -27,3 +27,18 @@ exports.update = (req, res) => {
     res.json({ message: 'Akun berhasil diupdate' });
   });
 };
+
+exports.login = (req, res) => {
+  service.login(req.body, (err, result) => {
+    if (err) return res.status(500).json(err);
+
+    if (result.length > 0) {
+      return res.json({
+        success: true,
+        data: result[0]
+      });
+    }
+
+    res.json({ success: false });
+  });
+};

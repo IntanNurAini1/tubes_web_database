@@ -24,3 +24,12 @@ exports.update = (id, data, cb) => {
   `;
   db.query(sql, [data.username, data.password, id], cb);
 };
+
+exports.login = (username, password, cb) => {
+  const sql = `
+    SELECT * FROM akun
+    WHERE username = ? AND password = ?
+    LIMIT 1
+  `;
+  db.query(sql, [username, password], cb);
+};
