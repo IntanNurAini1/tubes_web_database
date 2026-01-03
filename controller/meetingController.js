@@ -1,7 +1,15 @@
 const MeetingService = require('../service/meetingService');
 
 const MeetingController = {
+  // create(req, res) {
+  //   MeetingService.createMeeting(req.body, (err) => {
+  //     if (err) return res.status(400).json(err);
+  //     res.json({ message: 'Meeting berhasil ditambahkan' });
+  //   });
+  // },
   create(req, res) {
+    console.log('TANGGAL DARI LARAVEL:', req.body.tanggal); // 👈 TAMBAH INI
+
     MeetingService.createMeeting(req.body, (err) => {
       if (err) return res.status(400).json(err);
       res.json({ message: 'Meeting berhasil ditambahkan' });

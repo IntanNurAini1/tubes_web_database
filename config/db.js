@@ -5,12 +5,18 @@ const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
+  database: process.env.DB_NAME,
+  // timezone: '+07:00'
 });
 
 db.connect((err) => {
-  if (err) throw err;
+  if (err) {
+    console.error("DB CONNECTION ERROR:", err);
+    return;
+  }
+
   console.log('Database connected');
+
   db.query(`
     CREATE TABLE IF NOT EXISTS products (
       kode_produk VARCHAR(20) PRIMARY KEY,
@@ -18,33 +24,39 @@ db.connect((err) => {
       jumlah INT,
       status VARCHAR(20)
     )
-  `, () => {
-    console.log('Table products ready');
+  `, (err) => {
+    if (err) console.error(err);
+    else console.log('Table products ready');
   });
 
   db.query(`
-        CREATE TABLE IF NOT EXISTS logistik (
-          id INT AUTO_INCREMENT PRIMARY KEY,
-          kode VARCHAR(20),
-          nama VARCHAR(100),
-          jumlah INT,
-          status VARCHAR(20),
-          harga DECIMAL(10,2)
-        )
-      `, () => console.log('Table logistik ready'));
+    CREATE TABLE IF NOT EXISTS logistik (
+      id INT AUTO_INCREMENT PRIMARY KEY,
+      kode VARCHAR(20),
+      nama VARCHAR(100),
+      jumlah INT,
+      status VARCHAR(20),
+      harga DECIMAL(10,2)
+    )
+  `, (err) => {
+    if (err) console.error(err);
+    else console.log('Table logistik ready');
   });
 
   db.query(`
     CREATE TABLE IF NOT EXISTS meetings (
       id_meeting VARCHAR(50) PRIMARY KEY,
       judul VARCHAR(100),
+      target_divisi VARCHAR(100),
       tanggal DATE,
-      waktu TIME,
+      waktu_mulai TIME,
+      waktu_selesai TIME,
       deskripsi TEXT,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
-  `, () => {
-    console.log('Table meetings ready');
+  `, (err) => {
+    if (err) console.error("ERROR meetings:", err);
+    else console.log('Table meetings ready');
   });
 
   db.query(`
@@ -54,8 +66,9 @@ db.connect((err) => {
       deskripsi TEXT,
       status VARCHAR(20)
     )
-  `, () => {
-    console.log('Table maintenance_alat ready');
+  `, (err) => {
+    if (err) console.error(err);
+    else console.log('Table maintenance_alat ready');
   });
 
   db.query(`
@@ -65,12 +78,12 @@ db.connect((err) => {
       divisi VARCHAR(50),
       jabatan VARCHAR(50),
       status VARCHAR(20),
-      gaji DECIMAL(15, 2),
+      gaji DECIMAL(15,2),
       alamat TEXT,
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )
   `, (err) => {
-    if (err) console.error("Error creating karyawan table:", err);
+    if (err) console.error(err);
     else console.log('Table karyawan ready');
   });
 
@@ -84,7 +97,10 @@ db.connect((err) => {
         ON DELETE CASCADE
         ON UPDATE CASCADE
     )
-  `, () => console.log('Table akun ready'));
-
+  `, (err) => {
+    if (err) console.error(err);
+    else console.log('Table akun ready');
+  });
+});
 
 module.exports = db;

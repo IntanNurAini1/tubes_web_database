@@ -2,12 +2,14 @@ const db = require('../config/db');
 
 const MeetingRepository = {
   create(meeting, callback) {
-    const query = `INSERT INTO meetings (id_meeting, judul, tanggal, waktu, deskripsi)VALUES (?, ?, ?, ?, ?)`;
+    const query = `INSERT INTO meetings (id_meeting, judul, target_divisi, tanggal, waktu_mulai, waktu_selesai, deskripsi)VALUES (?, ?, ?, ?, ?, ?, ?)`;
     db.query(query, [
       meeting.id_meeting,
       meeting.judul,
+      meeting.target_divisi,
       meeting.tanggal,
-      meeting.waktu,
+      meeting.waktu_mulai,
+      meeting.waktu_selesai,
       meeting.deskripsi
     ], callback);
   },
@@ -27,13 +29,15 @@ const MeetingRepository = {
   update(id_meeting, meeting, callback) {
     const query = `
       UPDATE meetings
-      SET judul = ?, tanggal = ?, waktu = ?, deskripsi = ?
+      SET judul = ?, target_divisi = ?, tanggal = ?, waktu_mulai = ?, waktu_selesai = ?, deskripsi = ?
       WHERE id_meeting = ?
     `;
     db.query(query, [
       meeting.judul,
+      meeting.target_divisi,
       meeting.tanggal,
-      meeting.waktu,
+      meeting.waktu_mulai,
+      meeting.waktu_selesai,
       meeting.deskripsi,
       id_meeting
     ], callback);
