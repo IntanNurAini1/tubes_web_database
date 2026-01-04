@@ -1,11 +1,27 @@
 const service = require('../service/akunService');
 
+// exports.create = (req, res) => {
+//   service.create(req.body, (err) => {
+//     if (err) return res.status(500).json(err);
+//     res.json({ message: 'Akun berhasil dibuat' });
+//   });
+// };
 exports.create = (req, res) => {
-  service.create(req.body, (err) => {
-    if (err) return res.status(500).json(err);
+  const { nip, username, password } = req.body;
+
+  if (!nip || !username || !password) {
+    return res.status(400).json({ message: 'Data tidak lengkap' });
+  }
+
+  service.create(req.body, (err, result) => {
+    if (err) {
+      return res.status(err.status || 500).json({ message: err.message });
+    }
+
     res.json({ message: 'Akun berhasil dibuat' });
   });
 };
+
 
 exports.getAll = (req, res) => {
   service.getAll((err, data) => {
